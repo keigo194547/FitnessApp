@@ -14,6 +14,7 @@ public class AnyInputScreen extends AppCompatActivity {
     static EditText tallEdit,wightEdit;
     Button cialbutton;
 
+    int num1,num2 = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,17 +28,10 @@ public class AnyInputScreen extends AppCompatActivity {
         tallEdit = (EditText) findViewById(R.id.editTextTextTall);
         wightEdit = (EditText)findViewById(R.id.editTextTextWeight);
 
+        // editTextの入力値制限
+
+
         cialbutton = (Button) findViewById(R.id.calButton);
-
-        String str1 = tallEdit.getText().toString();
-        String str2 = wightEdit.getText().toString();
-
-        int num1 = Integer.parseInt(str1);
-        int num2 = Integer.parseInt(str2);
-
-        int result = num1 + num2;
-        resultText.setText(result);
-
 
 
 
@@ -45,6 +39,20 @@ public class AnyInputScreen extends AppCompatActivity {
             @Override
             public void onClick(View view) {
 
+                String str1 = tallEdit.getText().toString();
+                String str2 = wightEdit.getText().toString();
+
+                if(str1.length() >= 1 && str2.length() >= 1){
+                    num1 = Integer.parseInt(str1);
+                    num2 = Integer.parseInt(str2);
+                };
+
+
+                System.out.println(num1);
+                int result = num1 + num2;
+                String res = Integer.toString(result);
+                resultText.setText(res);
+                System.out.println(res);
             }
         });
 

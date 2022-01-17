@@ -26,20 +26,7 @@ public class MainActivity extends AppCompatActivity {
 
         // 画面遷移
         Button inputButton = (Button) findViewById(R.id.firstInput);
-        Button wightButtom = (Button) findViewById(R.id.firstInput);
-
-
-
-
-
-
-
-
-
-
-
-
-
+       // Button wightButtom = (Button) findViewById(R.id.firstInput);
 
 
 
@@ -53,10 +40,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
     }
-
-
 
 
 }
