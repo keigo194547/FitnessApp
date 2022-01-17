@@ -2,6 +2,7 @@ package com.example.fitnessapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -14,7 +15,12 @@ public class AnyInputScreen extends AppCompatActivity {
     static EditText tallEdit,wightEdit;
     Button cialbutton;
 
-    int num1,num2 = 0;
+    int tnum, wnum = 0;
+
+    public int bmiResult = 0;
+
+    public int matchResult = 0;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,9 +34,6 @@ public class AnyInputScreen extends AppCompatActivity {
         tallEdit = (EditText) findViewById(R.id.editTextTextTall);
         wightEdit = (EditText)findViewById(R.id.editTextTextWeight);
 
-        // editTextの入力値制限
-
-
         cialbutton = (Button) findViewById(R.id.calButton);
 
 
@@ -38,41 +41,45 @@ public class AnyInputScreen extends AppCompatActivity {
         cialbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String str1 = tallEdit.getText().toString();
                 String str2 = wightEdit.getText().toString();
 
                 if(str1.length() >= 1 && str2.length() >= 1){
-                    num1 = Integer.parseInt(str1);
-                    num2 = Integer.parseInt(str2);
+                    tnum = Integer.parseInt(str1);
+                    wnum = Integer.parseInt(str2);
                 };
 
+                // 各種値計算
+                bmiResult = (int) BMI(tnum, wnum);
+                matchResult = (int) ApporopriteWeight(tnum);
 
-                System.out.println(num1);
-                int result = num1 + num2;
-                String res = Integer.toString(result);
+                // 受け渡す値
+                String res = Integer.toString(bmiResult);
+                String matchres = Integer.toString(matchResult);
+                int bmiResultInt = bmiResult;
                 resultText.setText(res);
-                System.out.println(res);
+
+                Intent intent = new Intent(getApplicationContext(), BMI_disply.class);
+                intent.putExtra("Key1", res);
+                intent.putExtra("Key2",matchres);
+                intent.putExtra("Key3",bmiResultInt);
+                startActivity(intent);
             }
         });
-
-
     }
 
-
-    public float BMI(int tall, int weight){
-        float bmi = 0;
-        tall = tall / 10;
-        bmi = weight / tall * tall;
+    public float BMI(float tall, float weight){ //BMIの計算
+        float calTall = tall / 100;
+        float bmi = weight / (calTall * calTall);
         return bmi;
     }
 
-    public float ApporopriteWeight(int tall, int weight){
-        float appweight = 0;
-        tall = tall / 10;
-        appweight = (tall*tall)*22;
-        return appweight;
+    public float ApporopriteWeight(float tall){ // 適性体重の計算
+        float appWeight = 0;
+        float apptall = 0;
+        apptall = tall / 100;
+        appWeight = (apptall * apptall) * 22;
+        return appWeight;
     }
-
 
 }
