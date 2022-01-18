@@ -54,7 +54,7 @@ public class BMI_disply extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), BMI_disply.class);
+                Intent intent = new Intent(getApplicationContext(), BMIListInformation.class);
                 startActivity(intent);
             }
         });
