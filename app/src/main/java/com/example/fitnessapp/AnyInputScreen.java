@@ -36,8 +36,6 @@ public class AnyInputScreen extends AppCompatActivity {
 
         cialbutton = (Button) findViewById(R.id.calButton);
 
-
-
         cialbutton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

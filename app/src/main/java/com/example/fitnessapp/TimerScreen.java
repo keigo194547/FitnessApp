@@ -2,7 +2,9 @@ package com.example.fitnessapp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
 import android.widget.Chronometer;
 import android.os.SystemClock;
 import android.view.View;
@@ -12,6 +14,7 @@ import android.widget.ImageView;
 public class TimerScreen extends AppCompatActivity implements Chronometer.OnChronometerTickListener {
 
     int x = 0;
+    int getX;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,6 +23,21 @@ public class TimerScreen extends AppCompatActivity implements Chronometer.OnChro
 
         ((Chronometer)findViewById(R.id.chronometer)).start();
 
+        Button recodeButton = (Button) findViewById(R.id.recode);
+
+        recodeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplication(), TestSQL.class);
+
+                String res = Integer.toString(getX);
+                //System.out.println(res);
+                intent.putExtra("time",res);
+                startActivity(intent);
+            }
+        });
+
+        System.out.println(x);
     }
 
     public void onStart( View v ){
@@ -27,12 +45,15 @@ public class TimerScreen extends AppCompatActivity implements Chronometer.OnChro
         ((Chronometer)findViewById(R.id.chronometer)).start();
 
         ((Chronometer)findViewById(R.id.chronometer)).setOnChronometerTickListener(this);
+
+        x = 0; //timeをそのまま増やさないように
     }
 
     // ストップ
     public void onStop( View v ){
         ((Chronometer)findViewById(R.id.chronometer)).stop();
         ((ImageView)findViewById(R.id.iv)).setImageResource(R.drawable.musle);
+        // System.out.println(getX);
     }
 
     // 定期的処理② 約１秒毎に実行する具体的処理
@@ -47,6 +68,7 @@ public class TimerScreen extends AppCompatActivity implements Chronometer.OnChro
             // NOの場合
             ((ImageView) findViewById(R.id.iv)).setImageResource(R.drawable.cute2);
         }
-    }
+        getX = x;
 
+    }
 }
