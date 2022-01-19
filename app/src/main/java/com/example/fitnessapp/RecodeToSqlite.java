@@ -63,12 +63,7 @@ public class RecodeToSqlite extends AppCompatActivity {
 
         dbhelper = new DBHelper(this);  //データベースヘルパークラスの生成
 
-        if(db == null){
-            db = dbhelper.getWritableDatabase();  //データベースの作成 or オープン
-        }else{
-            dbhelper.onUpgrade(db, 1,2);
-        }
-
+        db = dbhelper.getWritableDatabase();  //データベースの作成 or オープン
 
 
 
@@ -79,6 +74,7 @@ public class RecodeToSqlite extends AppCompatActivity {
         @SuppressLint("Range")
         public void onClick(View v) {
             ContentValues values = new ContentValues();  //データベースに入力するデータを保存するためのオブジェクトの生成
+
             if(v == bt1) {
                 values.put("sampletext",recodetv.getText().toString());  //エディットテキストからデータベースに入力する値を取得
                 db.insert("sampletable", null, values);  //データベースに値を挿入
@@ -101,6 +97,7 @@ public class RecodeToSqlite extends AppCompatActivity {
                         cr.getString(cr.getColumnIndex("sampletext")) + "\n";
             }
             tv.setText(str);
+
         }
     }
 

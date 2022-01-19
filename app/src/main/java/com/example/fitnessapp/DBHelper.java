@@ -14,5 +14,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("CREATE TABLE sampletable (_id INTEGER PRIMARY KEY, sampletext TEXT)");
     }
 
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {}  //データベースアップデート時の処理
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+
+    }  //データベースアップデート時の処理
 }
