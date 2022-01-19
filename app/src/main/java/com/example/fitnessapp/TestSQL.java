@@ -3,6 +3,7 @@ package com.example.fitnessapp;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.ContentValues;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -12,14 +13,25 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
 public class TestSQL extends AppCompatActivity {
 
     private TextView textView;
     private TextView textKey, textValue;
     private TestDBHelper helper;
     private SQLiteDatabase db;
-    String hogeMu = "computer";
+    Intent intent;
+    String _timerResult;
+
     String hogeSA = "fa";
+
+    Calendar cl = Calendar.getInstance();
+    SimpleDateFormat sdf = new SimpleDateFormat("yyy/MMM/dd");
+    String date = sdf.format(cl.getTime());
+
+    String datekey = date;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,15 +39,13 @@ public class TestSQL extends AppCompatActivity {
         setContentView(R.layout.activity_test_sql);
 
         textKey = (TextView) findViewById(R.id.text_key);
-
         textValue = findViewById(R.id.text_value);
-
-        TextView tv = new TextView(this);
-
         textView = findViewById(R.id.text_view);
+        intent =  getIntent();
+        _timerResult = intent.getStringExtra("time");
 
-        textKey.setText(hogeMu);
-        textValue.setText(hogeSA);
+        textKey.setText(datekey);
+        textValue.setText(_timerResult);
 
         Button insertButton = findViewById(R.id.button_insert);
         insertButton.setOnClickListener(new View.OnClickListener() {
@@ -55,6 +65,15 @@ public class TestSQL extends AppCompatActivity {
 
                 // 価格は整数を想定
                 insertData(db, key, Integer.parseInt(value));
+            }
+        });
+
+
+        Button readButton = findViewById(R.id.button_read);
+        readButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                readData();
             }
         });
 

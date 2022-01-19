@@ -33,7 +33,7 @@ public class MainActivity extends AppCompatActivity {
         wightButtom.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), TestSQL.class);
+                Intent intent = new Intent(getApplicationContext(), BMIListInformation.class);
                 startActivity(intent);
             }
         });

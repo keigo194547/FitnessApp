@@ -28,7 +28,7 @@ public class TimerScreen extends AppCompatActivity implements Chronometer.OnChro
         recodeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplication(), RecodeToSqlite.class);
+                Intent intent = new Intent(getApplication(), TestSQL.class);
 
                 String res = Integer.toString(getX);
                 //System.out.println(res);
