@@ -19,7 +19,7 @@ public class MainActivity extends AppCompatActivity {
         // 画面遷移
         Button inputButton = (Button) findViewById(R.id.firstInput);
         Button wightButtom = (Button) findViewById(R.id.ListBMI);
-
+        Button timerButtom = (Button) findViewById(R.id.timerButton);
 
         // ボタン画面遷移
         inputButton.setOnClickListener(new View.OnClickListener() {
@@ -34,6 +34,14 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), BMIListInformation.class);
+                startActivity(intent);
+            }
+        });
+
+        timerButtom.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(), TimerScreen.class);
                 startActivity(intent);
             }
         });
